@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>한국지리 지역 퀴즈</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:linear-gradient(135deg,#fff8e7,#eef8ff);color:#263238;min-height:100vh}.wrap{max-width:720px;margin:auto;padding:22px 16px 48px}.card{background:#fff;border-radius:24px;padding:26px 20px;box-shadow:0 12px 35px #00000018;margin-top:16px}h1{text-align:center;margin:0 0 8px;font-size:30px}.sub{text-align:center;color:#718096;margin-bottom:24px}h2{margin-top:0}button{width:100%;border:0;border-radius:16px;padding:16px 14px;margin:8px 0;font-size:17px;font-weight:700;background:#f3f6f8;color:#263238;cursor:pointer}button.primary{background:#263238;color:#fff}.back{background:transparent;color:#607d8b;font-size:14px;padding:8px}.question{font-size:20px;line-height:1.65;font-weight:700;padding:20px;background:#f7fafc;border-radius:18px;margin:16px 0}input{width:100%;padding:16px;border:2px solid #e2e8f0;border-radius:14px;font-size:18px;outline:0}input:focus{border-color:#90caf9}.small{font-size:14px;color:#718096;line-height:1.6}.progress{font-weight:700;color:#546e7a}.result{text-align:center}.score{font-size:46px;font-weight:900;margin:8px 0}.ok{color:#2e7d32}.no{color:#c62828}.answerbox{background:#fff8e1;border-radius:14px;padding:14px;margin-top:12px;line-height:1.6}
+</style></head><body><div class="wrap"><div class="card" id="app"></div></div>
+<script>
+const regions={
+"수도권":[
+["고양","서울의 주거 기능을 분담하는 지역으로, 1기 신도시가 조성되어 있으며 국제 꽃 박람회가 열리는 지역이다.",["주거기능","1기신도시","국제꽃박람회"]],
+["파주","출판 관련 산업과 시설이 발달한 지역이며, 남북한의 접경 지역에 위치하여 판문점이 있다.",["출판","판문점"]],["가평","잣의 생산으로 유명한 지역으로, 지역의 대표적인 특산물로 잣이 알려져 있다.",["잣"]],["이천","쌀 생산으로 유명하며, 지역의 대표적인 농업 특성을 보여주는 쌀 축제가 열리는 지역이다.",["쌀축제"]],["성남","서울의 주거 기능을 분담하는 위성도시로, 1기 신도시가 조성되어 있다.",["주거기능","1기신도시"]],["용인","수도권의 대표적인 도시로, 2기 신도시가 조성되어 있으며 한국민속촌이 위치한 지역이다.",["2기신도시","한국민속촌"]],["과천","서울의 행정 기능을 일부 분담하는 위성도시로, 행정 관련 시설이 위치한 지역이다.",["행정기능","위성도시"]],["안산","서울의 공업 기능을 분담하는 위성도시로, 공업이 발달한 지역이다.",["공업기능","위성도시"]],["수원","경기도의 대표적인 도시로, 정조 때 축조된 역사적 문화유산인 수원화성이 위치한 지역이다.",["수원화성"]],["인천","우리나라의 대표적인 국제 관문 도시로, 영종도에 국제공항이 위치하고 있는 지역이다.",["국제공항","영종도"]]],
+"충청권":[
+["서산","석유를 원료로 다양한 화학 제품을 만드는 석유화학 산업이 발달한 지역이다.",["석유화학단지"]],["당진","철을 생산하는 제철 산업이 발달한 지역으로, 대규모 제철소가 위치한 지역이다.",["제철소"]],["아산","자동차 관련 산업이 발달한 지역으로 자동차 산업과 관련된 시설이 있다.",["자동차"]],["천안","지역을 대표하는 먹거리로 호두과자가 유명한 지역이다.",["호두과자"]],["내포","충청남도의 새로운 행정 중심지로 조성된 신도시이며, 충남도청이 이전한 지역이다.",["신도시","충남도청이전지"]],["보령","머드를 활용한 축제가 열리는 지역으로 유명하며, 석탄 산업과 관련된 석탄박물관이 있는 지역이다.",["머드축제","석탄박물관"]],["공주·부여","백제의 역사와 문화를 보여주는 문화유산과 관광 자원이 발달한 지역으로, 백제문화단지가 있다.",["백제문화단지"],["공주","부여","공주부여","공주,부여","공주·부여"]],["대전","과학 기술 연구 기관과 연구 개발 시설이 집중된 대덕연구개발특구가 있는 지역이다.",["대덕연구개발특구"]],["세종","수도권에 집중된 행정 기능을 분산하기 위해 여러 중앙 행정기관이 이전한 행정 중심 도시이다.",["행정기관이전지"]],["단양","남한강에 솟아 있는 도담삼봉으로 유명하며, 석회암의 용식 작용으로 형성된 카르스트 지형이 발달한 지역이다.",["도담삼봉","카르스트지형"]],["청주","철도 교통에서 중요한 역할을 하는 지역으로, 철도 노선이 나뉘는 분기점과 오동역이 있는 지역이다.",["분기점","오동역"]]],
+"강원권":[
+["철원","용암이 분출하여 만들어진 용암대지가 나타나며, 한탄강이 흐르는 지역이다. 평탄한 지형을 바탕으로 벼농사가 발달하였다.",["용암대지","한탄강"]],["화천","겨울철 산천어와 관련된 축제로 유명한 지역이다.",["산천어"]],["양구","주변보다 낮고 평탄한 침식분지가 나타나며, 지역의 대표적인 축제인 배꼽축제가 열리는 지역이다.",["침식분지","배꼽축제"]],["춘천","강원특별자치도의 도청 소재지이며, 여러 호수와 하천이 어우러진 호반의 도시로 알려진 지역이다.",["도청소재지","호반"]],["평창","고위평탄면이 나타나는 지역으로, 2018년 동계올림픽이 개최된 지역이다.",["동계올림픽","고위평탄면"]],["영월","단종의 유배지로 알려진 청령포가 있는 지역이다.",["청령포"]],["태백","과거 석탄 산업이 발달했던 지역으로 석탄박물관이 있으며, 한강과 낙동강의 발원지가 있는 지역이다.",["석탄박물관","한강낙동강발원지"]]]
+};
+
+function clean(s){return String(s).toLowerCase().replace(/[\s,，。、.·ㆍ/／]/g,"")}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+let S={region:null,diff:null,qs:[],i:0,score:0};
+
+function show(x){document.getElementById("app").innerHTML=x}
+function home(){show(`<h1>🌏 한국지리 지역 퀴즈</h1><div class="sub">지역 특징을 얼마나 잘 알고 있을까?</div><h2>지역을 선택하세요</h2>${Object.keys(regions).map(r=>`<button onclick="region('${r}')">${r}</button>`).join("")}`)}
+function region(r){S.region=r;difficulty()}
+function difficulty(){show(`<button class="back" onclick="home()">← 지역 다시 선택</button><h1>${S.region}</h1><div class="sub">난이도를 선택하세요</div><button class="primary" onclick="start('하')">🟢 하 — 설명을 보고 지역 맞히기</button><button class="primary" onclick="start('상')">🔴 상 — 지역을 보고 특징 쓰기</button>`)}
+function start(d){S.diff=d;S.qs=shuffle(regions[S.region]);S.i=0;S.score=0;count()}
+function count(){show(`<button class="back" onclick="difficulty()">← 난이도 다시 선택</button><h2>${S.region} · ${S.diff}</h2><p>몇 문제 풀까요? (최대 ${S.qs.length}문제)</p><input id="count" type="number" min="1" max="${S.qs.length}" value="${S.qs.length}" inputmode="numeric"><button class="primary" onclick="begin()">퀴즈 시작!</button>`)}
+function begin(){let n=Number(document.getElementById("count").value);if(!Number.isInteger(n)||n<1||n>S.qs.length){alert(`1~${S.qs.length} 사이로 입력해줘!`);return}S.qs=shuffle(S.qs).slice(0,n);question()}
+function question(){let q=S.qs[S.i];show(`<div class="progress">${S.i+1} / ${S.qs.length}</div><div class="question">${S.diff==="하"?q[1]:"📍 "+q[0]+"<br><span class='small'>이 지역의 특징을 적어보세요.</span>"}</div><input id="ans" placeholder="${S.diff==="하"?"지역 이름":"지역 특징"}" autocomplete="off"><button class="primary" onclick="submit()">정답 확인</button><p class="small">${S.diff==="상"?"필수 핵심 내용이 모두 들어가면 정답 처리됩니다.":"지역 이름을 직접 입력해보세요!"}</p>`);setTimeout(()=>{let x=document.getElementById("ans");x.focus();x.onkeydown=e=>{if(e.key==="Enter")submit()}},50)}
+function submit(){let q=S.qs[S.i],a=clean(document.getElementById("ans").value),correct,detail;if(S.diff==="하"){let ok=[q[0]];if(q[0]==="공주·부여")ok=["공주","부여","공주부여","공주,부여","공주·부여"];correct=ok.map(clean).includes(a);detail="정답: "+q[0]}else{let miss=q[2].filter(k=>!a.includes(clean(k)));correct=miss.length===0;detail=correct?"핵심 키워드를 모두 포함했어요!":"빠진 키워드: "+miss.join(", ")}if(correct)S.score++;show(`<div class="result"><div style="font-size:48px">${correct?"⭕":"❌"}</div><h2 class="${correct?"ok":"no"}">${correct?"정답!":"아쉬워요!"}</h2><div class="answerbox">${detail}</div>${S.diff==="상"?`<div class="small" style="margin-top:10px">필수 키워드: ${q[2].join(" · ")}</div>`:""}</div><button class="primary" onclick="next()">${S.i+1===S.qs.length?"결과 보기":"다음 문제 →"}</button>`)}
+function next(){S.i++;S.i>=S.qs.length?result():question()}
+function result(){let n=S.qs.length,p=Math.round(S.score/n*100);show(`<div class="result"><h1>🎉 퀴즈 끝!</h1><div class="sub">${S.region} · 난이도 ${S.diff}</div><div class="score">${S.score} / ${n}</div><h2>${p}%</h2><p>${p===100?"완벽해요! 🔥":p>=80?"거의 다 맞혔어요! 👏":p>=60?"조금만 더 복습해봐요! 💪":"다시 도전해보자! 📚"}</p></div><button class="primary" onclick="home()">🏠 지역 선택</button><button onclick="difficulty()">🔄 같은 지역에서 난이도 선택</button><button onclick="start(S.diff)">🎲 같은 조건으로 다시 풀기</button>`)}
+home();
+</script></body></html>
